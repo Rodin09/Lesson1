@@ -1,48 +1,49 @@
 package com.company;
 
 import java.util.Scanner;
+import java.lang.Exception;
 
 public class Main {
 
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws Exception {
+        System.out.print("Введите числа ");
+        Scanner s = new Scanner(System.in);
+        String value = s.nextLine();
+        String[] values = value.split("\\s");
+        if (values.length > 3) {
+            throw new Exception("Неверный формат ввода");
+        }
         boolean converta = false;
         boolean convertb = false;
-
-        Scanner s = new Scanner(System.in);
-        System.out.print("Введите числа ");
-        String sa = s.next();
+        String sa = values[0];
         int a;
         try {
             a = Integer.parseInt(sa);
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
             a = Convert.romanToNumber(sa);
             converta = true;
         }
-
-
-        char oper = s.next().charAt(0);
-        String sb = s.next();
-        int x;
-        int b;
+        String sb = values[1];
+        char oper = sb.charAt(0);
+        String sc = values[2];
+        int x, b;
         try {
-            b = Integer.parseInt(sb);
-        } catch (Exception e) {
-            b = Convert.romanToNumber(sb);
+            b = Integer.parseInt(sc);
+        } catch (
+                Exception e) {
+            b = Convert.romanToNumber(sc);
             convertb = true;
         }
-
         if (a > 10 || a < 1 || b > 10 || b < 1) {
-            System.out.print("Число больше 10 или меньше 1");
-            return;
+            throw new Exception("Неверный формат ввода");
+
         }
         if (converta != convertb) {
             System.out.print("Ведите числа в одной системе");
             return;
         }
-
-
         switch (oper) {
             case '+':
                 x = a + b;
